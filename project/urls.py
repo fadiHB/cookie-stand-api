@@ -21,6 +21,9 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/cookie-stand/", include("cookie_stand_api.urls")),
     path("api-auth/", include("rest_framework.urls")),
+
+
+    # For the Defult setting, in this project, I used a costom token, can found in the viw project 
     path(
         "api/token/",
         jwt_views.TokenObtainPairView.as_view(),
