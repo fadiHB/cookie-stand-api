@@ -114,9 +114,6 @@ celerybeat-schedule
 # mypy
 .mypy_cache/
 
-# js
-node_modules/
-.next/
 
 # poetry
 poetry.lock
