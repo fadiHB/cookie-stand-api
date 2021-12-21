@@ -16,19 +16,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework_simplejwt import views as jwt_views
+from .custom_token_claim import  MyClaimView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/cookie-stand/", include("cookie_stand_api.urls")),
     path("api-auth/", include("rest_framework.urls")),
 
+    ### Custom Token - cutstom claim
+    path("api/token/", MyClaimView.as_view(), name="MyTokenObtainPairView"),
 
-    # For the Defult setting, in this project, I used a costom token, can found in the viw project 
-    path(
-        "api/token/",
-        jwt_views.TokenObtainPairView.as_view(),
-        name="token_obtain_pair",
-    ),
+    ###  For the Defult setting, in this project, I used a costom token, can found in the viw project 
+    
+    # path(
+    #     "api/token/",
+    #     jwt_views.TokenObtainPairView.as_view(),
+    #     name="token_obtain_pair",
+    # ),
     path(
         "api/token/refresh",
         jwt_views.TokenRefreshView.as_view(),

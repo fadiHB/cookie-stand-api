@@ -24,20 +24,20 @@ class CookieStandDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CookieStandSerializer
 
 
-class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
+# class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+#     @classmethod
+#     def get_token(cls, user):
+#         token = super().get_token(user)
 
-        # Add custom claims
-        token["email"] = user.email
-        token["username"] = user.username
-        # ...
+#         # Add custom claims
+#         token["email"] = user.email
+#         token["username"] = user.username
+#         # ...
 
-        return token
+#         return token
 
-class MyTokenObtainPairView(TokenObtainPairView):
-    serializer_class = MyTokenObtainPairSerializer
+# class MyTokenObtainPairView(TokenObtainPairView):
+#     serializer_class = MyTokenObtainPairSerializer
 
 
 
@@ -64,7 +64,7 @@ from rest_framework_simplejwt.backends import TokenBackend
 #             request.user = user
 #         except ValidationError as v:
 #             print("validation error", v)
-@csrf_exempt 
+@csrf_exempt
 def verify_token(req):
     if req.method == "POST":
         if req.user.is_authenticated: # (not AnonymousUser)
@@ -73,7 +73,7 @@ def verify_token(req):
             try: # (not auth user)
                 user = req.user
                 user_token = valid_data['user']
-                
+
                 result = user == user_token
                 return JsonResponse({"result": result})
             except:
@@ -82,8 +82,8 @@ def verify_token(req):
             return JsonResponse({"result": False})
 
 
-        
-    
+
+
 
         # print(req.POST)
         # return HttpResponse("<div><h1>"+ key+"</h1></div>")
